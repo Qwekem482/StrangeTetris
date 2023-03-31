@@ -39,6 +39,7 @@ Score formula:
 Under Development
 ## Support and Tutorial
 
+![Group 310](https://user-images.githubusercontent.com/80797630/229062282-eaad0b16-af8a-4aaa-8652-a4be474f380c.png)
 
  - This project is made with Unity Engine, coded with Visual Studio Code.
  - Sprite and UI created with the help of [Nemie](https://www.facebook.com/nemie1502 "Nemie") and me using [Figma](https://www.figma.com/ "Figma").
