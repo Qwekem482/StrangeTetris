@@ -1,6 +1,8 @@
 
 # Strange Tetris
 
+Game are underdevelopment
+
 A simple Tetris but with 9 blocks
 
 Developed by Qwekem482
