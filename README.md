@@ -1,7 +1,7 @@
 
 # Strange Tetris
 
-Game are underdevelopment
+Game are under development
 
 A simple Tetris but with 9 blocks
 
