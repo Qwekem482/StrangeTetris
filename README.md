@@ -34,7 +34,7 @@ Score formula:
 |9      |400         |1000         |3000         |12000         |
 |n      |40 x (n + 1)|100 x (n + 1)|300 x (n + 1)|1200 x (n + 1)|
 
-**Increse Speed Mechanism**
+**Increase Speed Mechanism**
 
 Under Development
 ## Support and Tutorial
