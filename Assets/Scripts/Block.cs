@@ -7,21 +7,11 @@ using static GameBoard;
 public class Block : MonoBehaviour
 {
     private float lastFall = 0;
-    private bool drop = false;
     public static bool isGameOver = false;
+    private Vector2 startPos;
+    private bool fingerDown;
+    private int pixelDistToDetect = 100;
 
-//Improve Code DONE
-//Improve GameOver mechanism DONE
-//Improve Spawn Block mechanism DONE
-//Improve Rotate mechanism
-//Fix bug Rotate in try block (to remove try block)
-//Add Drop DONE
-//Add Score
-//Add Local High Score (Optional)
-//Add Timer
-//Add UI
-//Add Start & GameOver scene
-//Change Falling mechanism (Optional)
     void Start() 
     {
         if (!IsValidPosition()) 
@@ -33,13 +23,55 @@ public class Block : MonoBehaviour
 
     void Update() 
     {
+        if(fingerDown == false && Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+        {
+            startPos = Input.touches[0].position;
+            fingerDown = true;
+        }
+
+        if (fingerDown)
+        {
+            //Up
+            if(Input.touches[0].position.y >= startPos.y + pixelDistToDetect)
+            {
+                fingerDown = false;
+
+                transform.Rotate(0, 0, -90);
+       
+                if (IsValidPosition()) UpdateBoard();
+                else transform.Rotate(0, 0, 90);
+            }
+
+            //Down
+            else if(Input.touches[0].position.y <= startPos.y - pixelDistToDetect)
+            {
+                fingerDown = false;
+                PressDrop();
+            }
+
+            //Left
+            else if(Input.touches[0].position.x <= startPos.x - pixelDistToDetect)
+            {
+                fingerDown = false;
+                HorizontalMove(new Vector3(-1, 0, 0));
+            }
+    
+            //Right
+            else if(Input.touches[0].position.x >= startPos.x + pixelDistToDetect)
+            {
+                fingerDown = false;
+                HorizontalMove(new Vector3(1, 0, 0)); 
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftArrow)) HorizontalMove(new Vector3(-1, 0, 0));
 
         if (Input.GetKeyDown(KeyCode.RightArrow)) HorizontalMove(new Vector3(1, 0, 0));
 
-        if(Input.GetKeyDown(KeyCode.DownArrow)) drop = true;
-
-        if(Input.GetKey(KeyCode.DownArrow) && drop) Drop();
+        if(Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            PressDrop();
+        }
 
         if (Time.time - lastFall >= 1) 
         {
@@ -55,6 +87,27 @@ public class Block : MonoBehaviour
             if (IsValidPosition()) UpdateBoard();
             else transform.Rotate(0, 0, 90);
         }
+    }
+
+    private void PressDrop()
+    {
+        while(true)
+        {
+            transform.position += new Vector3(0, -1, 0);
+
+            if (IsValidPosition()) UpdateBoard();
+            else 
+            {
+                transform.position += new Vector3(0, 1, 0);
+
+                DeleteFullRows();
+                FindObjectOfType<Spawner>().Spawn();
+                
+                break;
+            }
+        }
+
+        enabled = false;
     }
 
     private void Drop()

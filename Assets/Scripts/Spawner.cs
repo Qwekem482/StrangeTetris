@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]private GameObject[] groups;
+    [SerializeField]private Sprite[] sprites;
     public static int nextBlock = 0;
 
     void Start() 
@@ -15,7 +16,13 @@ public class Spawner : MonoBehaviour
 
     public void Spawn() 
     {
-        Instantiate(groups[nextBlock], transform.position, Quaternion.identity);
+        GameObject newBlock = Instantiate(groups[nextBlock], transform.position, Quaternion.identity);
+
+        for(int i = 0; i < newBlock.transform.childCount; i++)
+        {
+            newBlock.transform.GetChild(i).GetComponent<SpriteRenderer>().sprite = sprites[nextBlock];
+        }
+        
         GenerateNext();
     }
 

@@ -12,6 +12,15 @@ public class Data : MonoBehaviour
     public static int currentExp = 0;
     public static int maxExp = 10;
 
+    void Start() {
+        score = 0;
+        level = 0;
+        time = "00:00:00";
+        consecutiveRow = 0;
+        currentExp = 0;
+        maxExp = 10;
+    }
+
     void Update()
     {
         time = ConvertTime((int) Time.timeSinceLevelLoad);
