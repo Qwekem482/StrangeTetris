@@ -1,8 +1,6 @@
 
 # Strange Tetris
 
-Game are under development
-
 A simple Tetris but with 9 blocks
 
 Developed by Qwekem482
@@ -18,7 +16,7 @@ Same as other Tetris game, random block will spawn from top of the play ground. 
 
 There is a level mechanism that will increase score and ~~drop speed~~. Amount of exp point is equal to number of total cleared row.
 
-Exp formula: MIN((level x 10 + 10), MAX(100, level x 10 -50))
+Exp formula: MIN((level x 10 + 10), MAX(100, level x 10 - 50))
 
 **Score Mechanism**
 
